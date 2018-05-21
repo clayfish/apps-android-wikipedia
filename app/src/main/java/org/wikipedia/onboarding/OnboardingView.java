@@ -15,17 +15,16 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class OnboardingView extends LinearLayout {
-    public interface Callback {
-        void onPositiveAction();
-        void onNegativeAction();
-    }
-
-    @BindView(R.id.view_onboarding_title) TextView titleView;
-    @BindView(R.id.view_onboarding_text) TextView textView;
-    @BindView(R.id.view_onboarding_action_positive) TextView actionViewPositive;
-    @BindView(R.id.view_onboarding_action_negative) TextView actionViewNegative;
-
-    @Nullable private Callback callback;
+    @BindView(R.id.view_onboarding_title)
+    TextView titleView;
+    @BindView(R.id.view_onboarding_text)
+    TextView textView;
+    @BindView(R.id.view_onboarding_action_positive)
+    TextView actionViewPositive;
+    @BindView(R.id.view_onboarding_action_negative)
+    TextView actionViewNegative;
+    @Nullable
+    private Callback callback;
 
     public OnboardingView(@NonNull Context context) {
         super(context);
@@ -71,5 +70,11 @@ public class OnboardingView extends LinearLayout {
         if (callback != null) {
             callback.onNegativeAction();
         }
+    }
+
+    public interface Callback {
+        void onPositiveAction();
+
+        void onNegativeAction();
     }
 }

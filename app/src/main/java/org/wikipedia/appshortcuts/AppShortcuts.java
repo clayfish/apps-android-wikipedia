@@ -37,8 +37,7 @@ public class AppShortcuts {
 
     @TargetApi(android.os.Build.VERSION_CODES.N_MR1)
     private ShortcutInfo randomShortcut() {
-
-        ShortcutInfo shortcut = new ShortcutInfo.Builder(app, app.getString(R.string.app_shortcuts_random))
+        return new ShortcutInfo.Builder(app, app.getString(R.string.app_shortcuts_random))
                 .setShortLabel(app.getString(R.string.app_shortcuts_random))
                 .setLongLabel(app.getString(R.string.app_shortcuts_random))
                 .setIcon(Icon.createWithResource(app, R.drawable.appshortcut_ic_random))
@@ -47,14 +46,11 @@ public class AppShortcuts {
                                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                                 .putExtra(Constants.INTENT_APP_SHORTCUT_RANDOM, true))
                 .build();
-
-        return shortcut;
     }
 
     @TargetApi(android.os.Build.VERSION_CODES.N_MR1)
     private ShortcutInfo continueReadingShortcut() {
-
-        ShortcutInfo shortcut = new ShortcutInfo.Builder(app, app.getString(R.string.app_shortcuts_continue_reading))
+        return new ShortcutInfo.Builder(app, app.getString(R.string.app_shortcuts_continue_reading))
                 .setShortLabel(app.getString(R.string.app_shortcuts_continue_reading))
                 .setLongLabel(app.getString(R.string.app_shortcuts_continue_reading))
                 .setIcon(Icon.createWithResource(app, R.drawable.appshortcut_ic_continue_reading))
@@ -62,14 +58,11 @@ public class AppShortcuts {
                         new Intent(PageActivity.ACTION_APP_SHORTCUT)
                                 .putExtra(Constants.INTENT_APP_SHORTCUT_CONTINUE_READING, true))
                 .build();
-
-        return shortcut;
     }
 
     @TargetApi(android.os.Build.VERSION_CODES.N_MR1)
     private ShortcutInfo searchShortcut() {
-
-        ShortcutInfo shortcut = new ShortcutInfo.Builder(app, app.getString(R.string.app_shortcuts_search))
+        return new ShortcutInfo.Builder(app, app.getString(R.string.app_shortcuts_search))
                 .setShortLabel(app.getString(R.string.app_shortcuts_search))
                 .setLongLabel(app.getString(R.string.app_shortcuts_search))
                 .setIcon(Icon.createWithResource(app, R.drawable.appshortcut_ic_search))
@@ -78,7 +71,5 @@ public class AppShortcuts {
                                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                                 .putExtra(Constants.INTENT_APP_SHORTCUT_SEARCH, true))
                 .build();
-
-        return shortcut;
     }
 }

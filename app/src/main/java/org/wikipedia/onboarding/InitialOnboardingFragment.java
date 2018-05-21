@@ -25,65 +25,34 @@ import static org.wikipedia.util.UriUtil.handleExternalLink;
 public class InitialOnboardingFragment extends OnboardingFragment {
     private PageViewCallback pageViewCallback = new PageViewCallback();
 
-    @NonNull public static InitialOnboardingFragment newInstance() {
+    @NonNull
+    public static InitialOnboardingFragment newInstance() {
         return new InitialOnboardingFragment();
     }
 
-    @Override protected PagerAdapter getAdapter() {
+    @Override
+    protected PagerAdapter getAdapter() {
         return new OnboardingPagerAdapter();
     }
 
-    @Override protected int getDoneButtonText() {
+    @Override
+    protected int getDoneButtonText() {
         return R.string.onboarding_get_started;
     }
 
-    @Override protected int getBackgroundResId() {
+    @Override
+    protected int getBackgroundResId() {
         return R.drawable.onboarding_gradient_background_135;
     }
 
-    @Override public void onActivityResult(int requestCode, int resultCode, final Intent data) {
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, final Intent data) {
         if (requestCode == Constants.ACTIVITY_REQUEST_LOGIN
                 && resultCode == LoginActivity.RESULT_LOGIN_SUCCESS) {
             FeedbackUtil.showMessage(this, R.string.login_success_toast);
             advancePage();
         } else {
             super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
-    private class PageViewCallback implements OnboardingPageView.Callback {
-        OnboardingPageView onboardingPageView;
-
-        @Override public void onSwitchChange(@NonNull OnboardingPageView view, boolean checked) {
-            if (OnboardingPage.of((int) view.getTag()).equals(OnboardingPage.PAGE_USAGE_DATA)) {
-                Prefs.setEventLoggingEnabled(checked);
-            }
-        }
-
-        @Override public void onLinkClick(@NonNull OnboardingPageView view, @NonNull String url) {
-            if (url.equals("#login")) {
-                startActivityForResult(LoginActivity
-                        .newIntent(requireContext(), LoginFunnel.SOURCE_ONBOARDING),
-                        Constants.ACTIVITY_REQUEST_LOGIN);
-            } else if (url.equals("#privacy")) {
-                FeedbackUtil.showPrivacyPolicy(getContext());
-            } else if (url.equals("#about")) {
-                FeedbackUtil.showAboutWikipedia(getContext());
-            } else if (url.equals("#offline")) {
-                FeedbackUtil.showOfflineReadingAndData(getContext());
-            } else {
-                handleExternalLink(getActivity(), Uri.parse(url));
-            }
-        }
-
-        @Override
-        public void onListActionButtonClicked(@NonNull OnboardingPageView view) {
-            onboardingPageView = view;
-            requireContext().startActivity(new Intent(getContext(), WikipediaLanguagesActivity.class));
-        }
-
-        @Nullable OnboardingPageView getOnboardingPageView() {
-            return onboardingPageView;
         }
     }
 
@@ -95,8 +64,91 @@ public class InitialOnboardingFragment extends OnboardingFragment {
         }
     }
 
+    enum OnboardingPage implements EnumCode {
+        PAGE_WELCOME(R.layout.inflate_initial_onboarding_page_zero),
+        PAGE_MULTILINGUAL(R.layout.inflate_initial_onboarding_page_multilingual),
+        PAGE_EXPLORE(R.layout.inflate_initial_onboarding_page_one),
+        PAGE_READING_LISTS(R.layout.inflate_initial_onboarding_page_two),
+        PAGE_USAGE_DATA(R.layout.inflate_initial_onboarding_page_three);
+
+        private static EnumCodeMap<OnboardingPage> MAP
+                = new EnumCodeMap<>(OnboardingPage.class);
+
+        @LayoutRes
+        private final int layout;
+
+        OnboardingPage(@LayoutRes int layout) {
+            this.layout = layout;
+        }
+
+        @NonNull
+        public static OnboardingPage of(int code) {
+            return MAP.get(code);
+        }
+
+        public static int size() {
+            return MAP.size();
+        }
+
+        int getLayout() {
+            return layout;
+        }
+
+        @Override
+        public int code() {
+            return ordinal();
+        }
+    }
+
+    private class PageViewCallback implements OnboardingPageView.Callback {
+        OnboardingPageView onboardingPageView;
+
+        @Override
+        public void onSwitchChange(@NonNull OnboardingPageView view, boolean checked) {
+            if (OnboardingPage.of((int) view.getTag()).equals(OnboardingPage.PAGE_USAGE_DATA)) {
+                Prefs.setEventLoggingEnabled(checked);
+            }
+        }
+
+        @Override
+        public void onLinkClick(@NonNull OnboardingPageView view, @NonNull String url) {
+            switch (url) {
+                case "#login":
+                    startActivityForResult(LoginActivity
+                                    .newIntent(requireContext(), LoginFunnel.SOURCE_ONBOARDING),
+                            Constants.ACTIVITY_REQUEST_LOGIN);
+                    break;
+                case "#privacy":
+                    FeedbackUtil.showPrivacyPolicy(getContext());
+                    break;
+                case "#about":
+                    FeedbackUtil.showAboutWikipedia(getContext());
+                    break;
+                case "#offline":
+                    FeedbackUtil.showOfflineReadingAndData(getContext());
+                    break;
+                default:
+                    handleExternalLink(getActivity(), Uri.parse(url));
+                    break;
+            }
+        }
+
+        @Override
+        public void onListActionButtonClicked(@NonNull OnboardingPageView view) {
+            onboardingPageView = view;
+            requireContext().startActivity(new Intent(getContext(), WikipediaLanguagesActivity.class));
+        }
+
+        @Nullable
+        OnboardingPageView getOnboardingPageView() {
+            return onboardingPageView;
+        }
+    }
+
     private class OnboardingPagerAdapter extends PagerAdapter {
-        @NonNull @Override public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        @NonNull
+        @Override
+        public Object instantiateItem(@NonNull ViewGroup container, int position) {
             OnboardingPage page = OnboardingPage.of(position);
             OnboardingPageView view = inflate(page, container);
             view.setTag(position);
@@ -115,52 +167,22 @@ public class InitialOnboardingFragment extends OnboardingFragment {
             return view;
         }
 
-        @Override public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        @Override
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
             OnboardingPageView view = ((OnboardingPageView) object);
             container.removeView(view);
             view.setCallback(null);
             view.setTag(-1);
         }
 
-        @Override public int getCount() {
+        @Override
+        public int getCount() {
             return OnboardingPage.size();
         }
 
-        @Override public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+        @Override
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
             return view == object;
-        }
-    }
-
-     enum OnboardingPage implements EnumCode {
-        PAGE_WELCOME(R.layout.inflate_initial_onboarding_page_zero),
-        PAGE_MULTILINGUAL(R.layout.inflate_initial_onboarding_page_multilingual),
-        PAGE_EXPLORE(R.layout.inflate_initial_onboarding_page_one),
-        PAGE_READING_LISTS(R.layout.inflate_initial_onboarding_page_two),
-        PAGE_USAGE_DATA(R.layout.inflate_initial_onboarding_page_three);
-
-        private static EnumCodeMap<OnboardingPage> MAP
-                = new EnumCodeMap<>(OnboardingPage.class);
-
-        @LayoutRes private final int layout;
-
-        int getLayout() {
-            return layout;
-        }
-
-        @NonNull public static OnboardingPage of(int code) {
-            return MAP.get(code);
-        }
-
-        public static int size() {
-            return MAP.size();
-        }
-
-        @Override public int code() {
-            return ordinal();
-        }
-
-        OnboardingPage(@LayoutRes int layout) {
-            this.layout = layout;
         }
     }
 }
