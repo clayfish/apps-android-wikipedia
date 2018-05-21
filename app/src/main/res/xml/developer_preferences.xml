@@ -183,6 +183,10 @@
             android:title="@string/preference_key_share_tutorial_enabled" />
 
         <SwitchPreferenceCompat
+            android:key="@string/preference_key_multilingual_search_tutorial_enabled"
+            android:title="@string/preference_key_multilingual_search_tutorial_enabled" />
+
+        <SwitchPreferenceCompat
             android:key="@string/preference_key_reading_list_tutorial_enabled"
             android:title="@string/preference_key_reading_list_tutorial_enabled" />
 
@@ -246,19 +250,12 @@
             android:key="@string/preference_key_delete_test_reading_lists"
             android:title="@string/preferences_developer_test_delete_lists" />
 
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/preferences_developer_cookies_heading"
-        android:key="@string/preferences_developer_cookies_key">
-
-
         <org.wikipedia.settings.EditTextAutoSummarizePreference
-            style="@style/DataStringPreference"
-            android:key="@string/preference_key_cookie_domains"
-            android:title="@string/preference_key_cookie_domains" />
-
-        <!-- dynamically added site entries -->
+            style="@style/EditTextAutoSummarizePreference"
+            android:dialogMessage="This number of malformed pages will be added to the default reading list:"
+            android:key="@string/preference_key_add_malformed_reading_list_page"
+            android:title="Add malformed pages to reading list" />
 
     </PreferenceCategory>
+
 </android.support.v7.preference.PreferenceScreen>

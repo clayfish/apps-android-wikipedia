@@ -29,12 +29,18 @@ public class FeedCoordinator extends FeedCoordinatorBase {
     }
 
     @Override
+    public void reset() {
+        super.reset();
+        aggregatedClient.invalidate();
+    }
+
+    @Override
     protected void buildScript(int age) {
         boolean online = DeviceUtil.isOnline();
 
         conditionallyAddPendingClient(new SearchClient(), age == 0);
         conditionallyAddPendingClient(new OfflineCompilationClient(), age == 0 && !online && OfflineManager.hasCompilation());
-        addPendingClient(new OnboardingClient());
+        conditionallyAddPendingClient(new OnboardingClient(), age == 0);
         conditionallyAddPendingClient(new AnnouncementClient(), age == 0 && online);
 
         List<FeedContentType> orderedContentTypes = new ArrayList<>();

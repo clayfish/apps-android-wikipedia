@@ -190,8 +190,8 @@ public class WikipediaLanguagesFragment extends Fragment implements WikipediaLan
             if (holder instanceof WikipediaLanguageItemHolder) {
                 WikipediaLanguageItemHolder itemHolder = ((WikipediaLanguageItemHolder) holder);
                 itemHolder.bindItem(wikipediaLanguages.get(pos - NUM_HEADERS), pos - NUM_FOOTERS);
-                itemHolder.getView().setDragHandleEnabled(wikipediaLanguages.size() > 1);
                 itemHolder.getView().setCheckBoxEnabled(checkboxEnabled);
+                itemHolder.getView().setDragHandleEnabled(wikipediaLanguages.size() > 1 && !checkboxEnabled);
                 itemHolder.getView().setOnClickListener(launchedFromSearch() && actionMode == null
                         ? view -> {
                             Intent resultIntent = new Intent();
@@ -405,10 +405,7 @@ public class WikipediaLanguagesFragment extends Fragment implements WikipediaLan
                         .setMessage(R.string.wikipedia_languages_remove_warning_dialog_content)
                         .setPositiveButton(android.R.string.ok, null);
             }
-
-            AlertDialog dialog = alertDialog.show();
-            TextView text = dialog.findViewById(android.R.id.message);
-            text.setLineSpacing(0, 1.3f);
+            alertDialog.show();
         }
     }
 }

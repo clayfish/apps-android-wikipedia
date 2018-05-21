@@ -87,31 +87,16 @@ public final class Prefs {
         setInt(R.string.preference_key_color_theme, theme);
     }
 
-    @NonNull
-    public static String getCookieDomains() {
-        return getString(R.string.preference_key_cookie_domains, "");
+    public static void setCookies(@NonNull SharedPreferenceCookieManager cookies) {
+        setString(R.string.preference_key_cookie_map, GsonMarshaller.marshal(cookies));
     }
 
-    @NonNull
-    public static List<String> getCookieDomainsAsList() {
-        return SharedPreferenceCookieManager.makeList(getCookieDomains());
-    }
-
-    public static void setCookieDomains(@Nullable String domains) {
-        setString(R.string.preference_key_cookie_domains, domains);
-    }
-
-    @NonNull
-    public static String getCookiesForDomain(@NonNull String domain) {
-        return getString(getCookiesForDomainKey(domain), "");
-    }
-
-    public static void setCookiesForDomain(@NonNull String domain, @Nullable String cookies) {
-        setString(getCookiesForDomainKey(domain), cookies);
-    }
-
-    public static void removeCookiesForDomain(@NonNull String domain) {
-        remove(getCookiesForDomainKey(domain));
+    @Nullable public static SharedPreferenceCookieManager getCookies() {
+        if (!contains(R.string.preference_key_cookie_map)) {
+            return null;
+        }
+        return GsonUnmarshaller.unmarshal(SharedPreferenceCookieManager.class,
+                getString(R.string.preference_key_cookie_map, null));
     }
 
     public static boolean crashedBeforeActivityCreated() {
@@ -214,7 +199,7 @@ public final class Prefs {
     public static List<Tab> getTabs() {
         return hasTabs()
                 ? TabUnmarshaller.unmarshal(getString(R.string.preference_key_tabs, null))
-                : Collections.<Tab>emptyList();
+                : Collections.emptyList();
     }
 
     public static boolean hasTabs() {
@@ -419,10 +404,6 @@ public final class Prefs {
 
     public static boolean isImageDownloadEnabled() {
         return getBoolean(R.string.preference_key_show_images, true);
-    }
-
-    public static String getCookiesForDomainKey(@NonNull String domain) {
-        return getKey(R.string.preference_key_cookies_for_domain_format, domain);
     }
 
     private static String getLastRunTimeKey(@NonNull String task) {
@@ -748,12 +729,12 @@ public final class Prefs {
         setBoolean(R.string.preference_key_reading_lists_first_time_sync, value);
     }
 
-    public static boolean getShowSearchTutorial() {
-        return getBoolean(R.string.preference_key_multilingual_search_onboarding, true);
+    public static boolean isMultilingualSearchTutorialEnabled() {
+        return getBoolean(R.string.preference_key_multilingual_search_tutorial_enabled, true);
     }
 
-    public static void setShowSearchOnboarding(boolean showOnboarding) {
-        setBoolean(R.string.preference_key_multilingual_search_onboarding, showOnboarding);
+    public static void setMultilingualSearchTutorialEnabled(boolean enabled) {
+        setBoolean(R.string.preference_key_multilingual_search_tutorial_enabled, enabled);
     }
 
     private Prefs() { }

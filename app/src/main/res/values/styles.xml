@@ -180,7 +180,7 @@
     </style>
 
     <style name="PageSearchViewEditTextStyle" parent="@style/Widget.AppCompat.AutoCompleteTextView">
-        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:textCursorDrawable">@drawable/custom_cursor</item>
         <item name="android:textColor">?attr/page_toolbar_icon_color</item>
         <item name="android:textColorHint">@color/white50</item>
     </style>
@@ -402,10 +402,17 @@
     <style name="DialogTextAppearance">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">?attr/material_theme_secondary_color</item>
+        <item name="android:lineSpacingExtra">@dimen/dialog_line_spacing_extra</item>
     </style>
 
     <style name="DialogTitleAppearance" parent="@style/RtlOverlay.DialogWindowTitle.AppCompat">
         <item name="android:textColor">?attr/material_theme_primary_color</item>
+        <item name="android:layout_marginBottom">5dp</item>
+    </style>
+
+    <style name="DialogTitleTextAppearance" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
 </resources>

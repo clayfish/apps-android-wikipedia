@@ -97,6 +97,10 @@
     <string name="login_activity_title">Log in to Wikipedia</string>
     <string name="login_in_progress_dialog_message">Logging you in…</string>
     <string name="login_success_toast">Logged in successfully!</string>
+    <string name="reset_password_title">Set your password</string>
+    <string name="reset_password_description">You logged in with a temporary password. To finish logging in, please set your new password here.</string>
+    <string name="reset_password_hint">New password</string>
+    <string name="reset_password_button">Save and log in</string>
     <string name="preference_title_logout">Log out</string>
     <string name="toast_logout_complete">Logged out</string>
     <string name="history_empty_title">No recently viewed articles</string>
@@ -267,7 +271,6 @@
     <string name="tool_tip_lang_button">You can now search and read in multiple Wikipedia languages in the app.\n\n\nTap on the icon to add more languages.</string>
     <string name="error_response_malformed">Response from the server was not formatted correctly.</string>
     <string name="error_unknown">An unknown error occurred.</string>
-    <string name="empty"></string>
     <string name="format_error_server_message">Message: \"%s\"</string>
     <string name="address_copied">Address copied to clipboard.</string>
     <string name="text_copied">Text copied to clipboard.</string>
