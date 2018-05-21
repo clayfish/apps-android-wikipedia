@@ -87,8 +87,8 @@ public class SearchFragment extends Fragment implements BackPressedHandler,
     private SearchFunnel funnel;
     private SearchInvokeSource invokeSource;
     private String searchLanguageCode;
-    private static final int LANG_BUTTON_TEXT_SIZE_LARGER = 13;
-    private static final int LANG_BUTTON_TEXT_SIZE_SMALLER = 10;
+    public static final int LANG_BUTTON_TEXT_SIZE_LARGER = 12;
+    public static final int LANG_BUTTON_TEXT_SIZE_SMALLER = 8;
     /**
      * Whether the Search fragment is currently showing.
      */
@@ -205,11 +205,12 @@ public class SearchFragment extends Fragment implements BackPressedHandler,
         }
     }
 
+
     private void showMultiLingualOnboarding() {
-        if (Prefs.getShowSearchTutorial() && WikipediaApp.getInstance().language().getRemainingAvailableLanguageCodes().size() > 0) {
+        if (Prefs.isMultilingualSearchTutorialEnabled() && WikipediaApp.getInstance().language().getRemainingAvailableLanguageCodes().size() > 0) {
             FeedbackUtil.showTapTargetView(requireActivity(), langButton, R.string.empty,
                     R.string.tool_tip_lang_button, null);
-            Prefs.setShowSearchOnboarding(false);
+            Prefs.setMultilingualSearchTutorialEnabled(false);
         }
     }
 

@@ -3,13 +3,14 @@ package org.wikipedia.settings;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.TwoStatePreference;
+import android.text.TextUtils;
 
 import org.wikipedia.R;
 import org.wikipedia.WikipediaApp;
 import org.wikipedia.crash.RemoteLogException;
+import org.wikipedia.dataclient.WikiSite;
 import org.wikipedia.page.PageTitle;
 import org.wikipedia.readinglist.database.ReadingList;
 import org.wikipedia.readinglist.database.ReadingListDbHelper;
@@ -89,7 +90,6 @@ class DeveloperSettingsPreferenceLoader extends BasePreferenceLoader {
         loadPreferences(R.xml.developer_preferences);
         setUpRestBaseCheckboxes();
         setUpMediaWikiSettings();
-        setUpCookies((PreferenceCategory) findPreference(R.string.preferences_developer_cookies_key));
 
         findPreference(context.getString(R.string.preferences_developer_crash_key))
                 .setOnPreferenceClickListener(preference -> {
@@ -143,6 +143,18 @@ class DeveloperSettingsPreferenceLoader extends BasePreferenceLoader {
                     }
                     int numOfLists = Integer.valueOf(newValue.toString().trim());
                     deleteTestReadingList(TEXT_OF_TEST_READING_LIST, numOfLists);
+                    return true;
+                });
+
+        findPreference(R.string.preference_key_add_malformed_reading_list_page)
+                .setOnPreferenceChangeListener((preference, newValue) -> {
+                    int numberOfArticles = TextUtils.isEmpty(newValue.toString()) ? 1 :  Integer.valueOf(newValue.toString().trim());
+                    List<ReadingListPage> pages = new ArrayList<>();
+                    for (int i = 0; i < numberOfArticles; i++) {
+                        PageTitle pageTitle = new PageTitle("Malformed page " + i, WikiSite.forLanguageCode("foo"));
+                        pages.add(new ReadingListPage(pageTitle));
+                    }
+                    ReadingListDbHelper.instance().addPagesToList(ReadingListDbHelper.instance().getDefaultList(), pages, true);
                     return true;
                 });
     }
@@ -217,23 +229,6 @@ class DeveloperSettingsPreferenceLoader extends BasePreferenceLoader {
                 numOfLists--;
             }
         }
-    }
-
-    private void setUpCookies(@NonNull PreferenceCategory cat) {
-        List<String> domains = Prefs.getCookieDomainsAsList();
-        for (String domain : domains) {
-            String key = Prefs.getCookiesForDomainKey(domain);
-            Preference pref = newDataStringPref(key, domain);
-            cat.addPreference(pref);
-        }
-    }
-
-    private EditTextAutoSummarizePreference newDataStringPref(String key, String title) {
-        EditTextAutoSummarizePreference pref = new EditTextAutoSummarizePreference(context, null,
-                R.attr.editTextAutoSummarizePreferenceStyle);
-        pref.setKey(key);
-        pref.setTitle(title);
-        return pref;
     }
 
     private static class TestException extends RuntimeException {

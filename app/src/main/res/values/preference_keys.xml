@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="preference_key_language">content_language</string>
-    <string name="preference_key_cookie_domains">cookie_domains</string>
-    <string name="preference_key_cookies_for_domain_format">cookies_for_domain_%1$s</string>
+    <string name="preference_key_cookie_map">cookie_map</string>
     <string name="preference_key_zero_interstitial">zero_warn_when_leaving</string>
     <string name="preference_key_zero_config_hash">zeroConfigHash</string>
     <string name="preference_key_zero_tutorial_enabled">zeroTutorialEnabled</string>
@@ -18,6 +17,7 @@
     <string name="preference_key_share_tutorial_enabled">shareTutorialEnabled</string>
     <string name="preference_key_reading_list_tutorial_enabled">readingListTutorialEnabled</string>
     <string name="preference_key_toc_tutorial_enabled">tocTutorialEnabled</string>
+    <string name="preference_key_multilingual_search_tutorial_enabled">multilingualSearchTutorialEnabled</string>
     <string name="preference_key_show_images">showImages</string>
     <string name="preference_key_use_restbase">useRestbase</string>
     <string name="preference_key_use_restbase_manual">useRestbase_setManually</string>
@@ -78,6 +78,7 @@
     <string name="preference_key_add_reading_lists">addReadingLists</string>
     <string name="preference_key_delete_reading_lists">deleteReadingLists</string>
     <string name="preference_key_delete_test_reading_lists">deleteTestReadingLists</string>
+    <string name="preference_key_add_malformed_reading_list_page">addMalformedReadingListPage</string>
     <string name="preference_key_reading_lists_last_sync_time">readingListsLastSyncTime</string>
     <string name="preference_key_reading_lists_deleted_ids">readingListsDeletedIds</string>
     <string name="preference_key_reading_list_pages_deleted_ids">readingListPagesDeletedIds</string>
@@ -85,5 +86,4 @@
     <string name="preference_key_show_reading_lists_merge_prompt">showReadingListsMergePrompt</string>
     <string name="preference_key_reading_lists_first_time_sync">readingListsFirstTimeSync</string>
     <string name="preference_key_about_wikipedia_app">aboutWikipediaApp</string>
-    <string name="preference_key_multilingual_search_onboarding">showMultilingualVersionUpdateSearchOnboarding</string>
 </resources>

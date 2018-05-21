@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
@@ -19,7 +20,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -118,16 +118,11 @@ public class OnboardingPageView extends LinearLayout {
             String switchText = array.getString(R.styleable.OnboardingPageView_switchText);
             listDataType = array.getString(R.styleable.OnboardingPageView_dataType);
             boolean showListView = array.getBoolean(R.styleable.OnboardingPageView_showListView, false);
-            int imageSize = array.getDimensionPixelSize(R.styleable.OnboardingPageView_imageSize, 0);
             Drawable background = array.getDrawable(R.styleable.OnboardingPageView_background);
 
             if (background != null) {
                 setBackground(background);
             }
-            FrameLayout.LayoutParams imageParams = (FrameLayout.LayoutParams) imageViewCentered.getLayoutParams();
-            imageParams.width = imageSize;
-            imageParams.height = imageSize;
-            imageViewCentered.setLayoutParams(imageParams);
             imageViewCentered.setImageDrawable(centeredImage);
             primaryTextView.setText(primaryText);
             secondaryTextView.setText(StringUtil.fromHtml(secondaryText));
@@ -192,6 +187,7 @@ public class OnboardingPageView extends LinearLayout {
 
         @Override
         public void onBindViewHolder(@NonNull OptionsViewHolder holder, int position) {
+            holder.optionLabelTextView.setTextDirection(ViewCompat.LAYOUT_DIRECTION_LTR == ViewCompat.getLayoutDirection(primaryTextView) ? TEXT_DIRECTION_LTR : TEXT_DIRECTION_RTL);
             holder.optionLabelTextView.setText(String.format(getContext().getString(R.string.onboarding_option_string), String.valueOf(position + 1), items.get(position)));
         }
 
