@@ -146,7 +146,7 @@ public class DescriptionEditClient {
 
     @VisibleForTesting interface Service {
         @Headers("Cache-Control: no-cache")
-        @POST("w/api.php?action=wbsetdescription&format=json&formatversion=2")
+        @POST("kk/api.php?action=wbsetdescription&format=json&formatversion=2")
         @FormUrlEncoded
         Call<DescriptionEdit> edit(@NonNull @Field("language") String language,
                                    @NonNull @Field("uselang") String useLang,

@@ -51,7 +51,9 @@ public class DescriptionEditRevertHelpView extends ScrollView {
     private Uri getHistoryUri(@NonNull String qNumber) {
         return new Uri.Builder()
                 .scheme(WikipediaApp.getInstance().getWikiSite().scheme())
-                .authority("m.wikidata.org")
+//                .authority("m.wikidata.org")
+                // m.kavitakosh.org is not accessible
+                .authority("wwww.kavitakosh.org")
                 .appendPath("wiki")
                 .appendPath("Special:History")
                 .appendPath(qNumber)

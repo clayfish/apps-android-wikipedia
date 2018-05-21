@@ -27,6 +27,9 @@ public final class NotificationPresenter {
     private static final int REQUEST_CODE_AGENT = 2;
     private static final String CHANNEL_ID = "GENERAL_CHANNEL";
 
+    private NotificationPresenter() {
+    }
+
     public static void showNotification(@NonNull Context context, Notification n) {
         @StringRes int title;
         Spanned description;
@@ -94,12 +97,9 @@ public final class NotificationPresenter {
     private static Uri uriForPath(@NonNull Notification n, @NonNull String path) {
         return new Uri.Builder()
                 .scheme(WikipediaApp.getInstance().getWikiSite().scheme())
-                .authority(n.isFromWikidata() ? "m.wikidata.org" : WikipediaApp.getInstance().getWikiSite().mobileAuthority())
+                .authority(n.isFromWikidata() ? "www.kavitakosh.org" : WikipediaApp.getInstance().getWikiSite().mobileAuthority())
                 .appendPath("wiki")
                 .appendPath(path)
                 .build();
-    }
-
-    private NotificationPresenter() {
     }
 }

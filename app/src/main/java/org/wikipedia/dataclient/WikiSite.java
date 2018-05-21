@@ -38,7 +38,7 @@ import org.wikipedia.util.UriUtil;
  * </ul>
  */
 public class WikiSite implements Parcelable {
-    public static final String DEFAULT_SCHEME = "https";
+    private static final String DEFAULT_SCHEME = "http";
 
     public static final Parcelable.Creator<WikiSite> CREATOR = new Parcelable.Creator<WikiSite>() {
         @Override
@@ -137,7 +137,7 @@ public class WikiSite implements Parcelable {
      */
     @NonNull
     public String path(@NonNull String segment) {
-        return "/w/" + segment;
+        return "/kk/" + segment;
     }
 
 
@@ -212,11 +212,7 @@ public class WikiSite implements Parcelable {
         }
 
         WikiSite wiki = (WikiSite) o;
-
-        if (!uri.equals(wiki.uri)) {
-            return false;
-        }
-        return languageCode.equals(wiki.languageCode);
+        return uri.equals(wiki.uri) && languageCode.equals(wiki.languageCode);
     }
 
     // Auto-generated

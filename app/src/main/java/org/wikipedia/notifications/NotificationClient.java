@@ -33,7 +33,7 @@ public final class NotificationClient {
         void failure(Throwable t);
     }
 
-    private static final NotificationClient INSTANCE = new NotificationClient(new WikiSite("www.wikidata.org", ""));
+    private static final NotificationClient INSTANCE = new NotificationClient(new WikiSite("www.kavitakosh.org", ""));
 
     public static NotificationClient instance() {
         return INSTANCE;
@@ -108,7 +108,7 @@ public final class NotificationClient {
     }
 
     @VisibleForTesting interface Service {
-        String ACTION = "w/api.php?format=json&formatversion=2&action=";
+        String ACTION = "kk/api.php?format=json&formatversion=2&action=";
 
         @Headers("Cache-Control: no-cache")
         @GET(ACTION + "query&meta=notifications&notfilter=!read&notprop=list")

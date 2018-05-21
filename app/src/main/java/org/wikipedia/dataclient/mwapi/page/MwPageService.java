@@ -36,7 +36,7 @@ public interface MwPageService {
       unparsed wikitext, which we certainly don't want.
     */
     @Headers("x-analytics: preview=1")
-    @GET("w/api.php?action=query&format=json&formatversion=2&redirects=&converttitles="
+    @GET("kk/api.php?action=query&format=json&formatversion=2&redirects=&converttitles="
             + "&prop=extracts%7Cpageimages%7Cpageprops&exsentences=5&piprop=thumbnail%7Cname"
             + "&pilicense=any&explaintext=&pithumbsize=" + Constants.PREFERRED_THUMB_SIZE)
     @NonNull Call<MwQueryPageSummary> summary(@NonNull @Query("titles") String title,
@@ -49,7 +49,7 @@ public interface MwPageService {
      * @param leadImageWidth one of the bucket widths for the lead image
      */
     @Headers("x-analytics: pageview=1")
-    @GET("w/api.php?action=mobileview&format=json&formatversion=2&prop="
+    @GET("kk/api.php?action=mobileview&format=json&formatversion=2&prop="
             + "text%7Csections%7Clanguagecount%7Cthumb%7Cimage%7Cid%7Cnamespace%7Crevision"
             + "%7Cdescription%7Clastmodified%7Cnormalizedtitle%7Cdisplaytitle%7Cprotection"
             + "%7Ceditable%7Cpageprops&pageprops=wikibase_item"
@@ -65,7 +65,7 @@ public interface MwPageService {
      *
      * @param title the page title to be used including prefix
      */
-    @GET("w/api.php?action=mobileview&format=json&formatversion=2&prop="
+    @GET("kk/api.php?action=mobileview&format=json&formatversion=2&prop="
             + "text%7Csections&onlyrequestedsections=1&sections=1-"
             + "&sectionprop=toclevel%7Cline%7Canchor&noheadings=")
     @NonNull Call<MwMobileViewPageRemaining> sections(@Nullable @Header("Cache-Control") String cacheControl,

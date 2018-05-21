@@ -85,7 +85,7 @@ class EditClient {
     @VisibleForTesting interface Service {
         @FormUrlEncoded
         @Headers("Cache-Control: no-cache")
-        @POST("w/api.php?action=edit&format=json&formatversion=2&nocreate=")
+        @POST("kk/api.php?action=edit&format=json&formatversion=2&nocreate=")
         @SuppressWarnings("checkstyle:parameternumber")
         Call<Edit> edit(@NonNull @Field("title") String title,
                         @Field("section") int section,

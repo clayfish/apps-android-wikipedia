@@ -23,7 +23,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 public class CsrfTokenClientTest extends MockWebServerTest {
-    private static final WikiSite TEST_WIKI = new WikiSite("test.wikipedia.org");
+    private static final WikiSite TEST_WIKI = new WikiSite("test.kavitakosh.org");
     @NonNull private final CsrfTokenClient subject = new CsrfTokenClient(TEST_WIKI, TEST_WIKI);
 
     @Test public void testRequestSuccess() throws Throwable {

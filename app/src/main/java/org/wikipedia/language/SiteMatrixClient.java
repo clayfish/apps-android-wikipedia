@@ -96,7 +96,7 @@ public class SiteMatrixClient {
     }
 
     @VisibleForTesting interface Service {
-        @GET("w/api.php?action=sitematrix&format=json&smtype=language&smlangprop=code%7Cname%7Clocalname")
+        @GET("kk/api.php?action=sitematrix&format=json&smtype=language&smlangprop=code%7Cname%7Clocalname")
         Call<SiteMatrix> siteMatrix();
     }
 }

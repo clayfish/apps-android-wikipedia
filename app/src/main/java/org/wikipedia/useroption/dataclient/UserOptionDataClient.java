@@ -121,7 +121,7 @@ public class UserOptionDataClient {
 
     // todo: rename service
     private interface Service {
-        String ACTION = "w/api.php?format=json&formatversion=2&action=";
+        String ACTION = "kk/api.php?format=json&formatversion=2&action=";
 
         @GET(ACTION + "query&meta=userinfo&uiprop=options")
         @NonNull Call<MwQueryResponse> get();

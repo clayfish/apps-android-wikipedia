@@ -85,7 +85,7 @@ public class UserExtendedInfoClient {
     }
 
     @VisibleForTesting interface Service {
-        @GET("w/api.php?action=query&format=json&formatversion=2&meta=userinfo&list=users&usprop=groups|cancreate")
+        @GET("kk/api.php?action=query&format=json&formatversion=2&meta=userinfo&list=users&usprop=groups|cancreate")
         Call<MwQueryResponse> request(@Query("ususers") @NonNull String userName);
     }
 

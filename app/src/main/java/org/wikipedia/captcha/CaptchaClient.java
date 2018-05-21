@@ -53,7 +53,7 @@ class CaptchaClient {
 
     @VisibleForTesting interface Service {
         /* Get a fresh Captcha ID. */
-        @GET("w/api.php?action=fancycaptchareload&format=json&formatversion=2")
+        @GET("kk/api.php?action=fancycaptchareload&format=json&formatversion=2")
         Call<Captcha> refreshCaptcha();
     }
 }

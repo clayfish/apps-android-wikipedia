@@ -57,7 +57,7 @@ class EditPreviewClient {
 
     @VisibleForTesting interface Service {
         @FormUrlEncoded
-        @POST("w/api.php?action=parse&format=json&formatversion=2&prop=text&sectionpreview=&pst="
+        @POST("kk/api.php?action=parse&format=json&formatversion=2&prop=text&sectionpreview=&pst="
                 + "&mobileformat=")
         Call<EditPreview> previewEdit(@NonNull @Field("title") String title,
                                       @NonNull @Field("text") String text);

@@ -81,7 +81,7 @@ def list_from_sitematrix():
             continue
         wikipedia_url = ""
         for site in site_list:
-            if "wikipedia.org" in site[u"url"] and u"closed" not in site:
+            if "kavitakosh.org" in site[u"url"] and u"closed" not in site:
                 wikipedia_url = site[u"url"]
         if len(wikipedia_url) == 0:
             continue
@@ -131,7 +131,7 @@ def postprocess_wikis(wiki_list):
 def populate_aliases(wikis):
     for wiki in wikis.wikis:
         print(u"Fetching Special Page and File alias for %s" % wiki.lang)
-        url = u"https://%s.wikipedia.org/w/api.php" % wiki.lang + \
+        url = u"https://%s.kavitakosh.org/w/api.php" % wiki.lang + \
               u"?action=query&meta=siteinfo&format=json&siprop=namespaces"
         data = json.loads(requests.get(url).text)
         # according to https://www.mediawiki.org/wiki/Manual:Namespace
@@ -146,7 +146,7 @@ def populate_aliases(wikis):
 def populate_main_pages(wikis):
     for wiki in wikis.wikis:
         print(u"Fetching Main Page for %s" % wiki.lang)
-        url = u"https://%s.wikipedia.org/w/api.php" % wiki.lang + \
+        url = u"https://%s.kavitakosh.org/w/api.php" % wiki.lang + \
               u"?action=query&meta=siteinfo&format=json&siprop=general"
         data = json.loads(requests.get(url).text)
         wiki.props[u"main_page_name"] = data[u"query"][u"general"][u"mainpage"]

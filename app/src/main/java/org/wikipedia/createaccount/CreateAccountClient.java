@@ -71,7 +71,7 @@ class CreateAccountClient {
     @VisibleForTesting interface Service {
         @SuppressWarnings("checkstyle:parameternumber")
         @FormUrlEncoded
-        @POST("w/api.php?action=createaccount&format=json&formatversion=2")
+        @POST("kk/api.php?action=createaccount&format=json&formatversion=2")
         Call<CreateAccountResponse> request(@NonNull @Field("username") String user,
                                             @NonNull @Field("password") String pass,
                                             @NonNull @Field("retype") String retype,

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-PREFIX="https://en.wikipedia.org/w"
+PREFIX="http://www.kavitakosh.org/kk"
 
 #For use when importing styles from a local Vagrant instance
 #PREFIX="localhost:8080/w"

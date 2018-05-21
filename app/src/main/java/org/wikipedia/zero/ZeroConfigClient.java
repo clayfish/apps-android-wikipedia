@@ -55,7 +55,7 @@ class ZeroConfigClient {
     }
 
     interface Service {
-        @GET("w/api.php?action=zeroconfig&format=json&formatversion=2&type=message")
+        @GET("kk/api.php?action=zeroconfig&format=json&formatversion=2&type=message")
         Call<ZeroConfig> get(@NonNull @Query("agent") String userAgent);
     }
 }

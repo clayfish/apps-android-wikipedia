@@ -202,14 +202,14 @@ public class LoginClient {
         /** Request a login token to be used later to log in. */
         @NonNull
         @Headers("Cache-Control: no-cache")
-        @POST("w/api.php?format=json&formatversion=2&action=query&meta=tokens&type=login")
+        @POST("kk/api.php?format=json&formatversion=2&action=query&meta=tokens&type=login")
         Call<MwQueryResponse> requestLoginToken();
 
         /** Actually log in. Has to be x-www-form-urlencoded */
         @NonNull
         @Headers("Cache-Control: no-cache")
         @FormUrlEncoded
-        @POST("w/api.php?action=clientlogin&format=json&formatversion=2&rememberMe=")
+        @POST("kk/api.php?action=clientlogin&format=json&formatversion=2&rememberMe=")
         Call<LoginResponse> logIn(@Field("username") String user, @Field("password") String pass,
                                   @Field("logintoken") String token, @Field("loginreturnurl") String url);
 
@@ -217,7 +217,7 @@ public class LoginClient {
         @NonNull
         @Headers("Cache-Control: no-cache")
         @FormUrlEncoded
-        @POST("w/api.php?action=clientlogin&format=json&formatversion=2&rememberMe=")
+        @POST("kk/api.php?action=clientlogin&format=json&formatversion=2&rememberMe=")
         Call<LoginResponse> logIn(@Field("username") String user, @Field("password") String pass,
                                   @Field("OATHToken") String twoFactorCode, @Field("logintoken") String token,
                                   @Field("logincontinue") boolean loginContinue);

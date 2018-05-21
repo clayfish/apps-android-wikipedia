@@ -62,7 +62,7 @@ public class ImageLicenseFetchClient {
     }
 
     @VisibleForTesting interface Service {
-        @GET("w/api.php?action=query&format=json&formatversion=2&prop=imageinfo&iiprop=extmetadata")
+        @GET("kk/api.php?action=query&format=json&formatversion=2&prop=imageinfo&iiprop=extmetadata")
         Call<MwQueryResponse> request(@NonNull @Query("titles") String titles);
     }
 }

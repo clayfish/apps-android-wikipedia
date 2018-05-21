@@ -394,7 +394,7 @@ public class GalleryActivity extends BaseActivity implements LinkPreviewDialog.C
                 showLinkPreview(title);
             } else {
                 // if it's a /w/ URI, turn it into a full URI and go external
-                if (url.startsWith("/w/")) {
+                if (url.startsWith("/kk/")) {
                     url = String.format("%1$s://%2$s", app.getWikiSite().scheme(),
                             app.getWikiSite().authority()) + url;
                 }

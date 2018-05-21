@@ -23,9 +23,16 @@ import java.util.Map;
 public final class SharedPreferenceCookieManager extends CookieManager {
     private static final String DELIMITER = ";";
     private static final String CENTRALAUTH_PREFIX = "centralauth_";
+    private static SharedPreferenceCookieManager INSTANCE;
     private final Map<String, Map<String, String>> cookieJar = new HashMap<>();
 
-    private static SharedPreferenceCookieManager INSTANCE;
+    private SharedPreferenceCookieManager() {
+        List<String> domains = Prefs.getCookieDomainsAsList();
+        for (String domain : domains) {
+            String cookies = Prefs.getCookiesForDomain(domain);
+            cookieJar.put(domain, makeCookieMap(makeList(cookies)));
+        }
+    }
 
     @NonNull
     public static SharedPreferenceCookieManager getInstance() {
@@ -35,12 +42,8 @@ public final class SharedPreferenceCookieManager extends CookieManager {
         return INSTANCE;
     }
 
-    private SharedPreferenceCookieManager() {
-        List<String> domains = Prefs.getCookieDomainsAsList();
-        for (String domain: domains) {
-            String cookies = Prefs.getCookiesForDomain(domain);
-            cookieJar.put(domain, makeCookieMap(makeList(cookies)));
-        }
+    public static List<String> makeList(String str) {
+        return StringUtil.delimiterStringToList(str, DELIMITER);
     }
 
     @Override
@@ -54,11 +57,13 @@ public final class SharedPreferenceCookieManager extends CookieManager {
 
         String domain = uri.getAuthority();
 
-        for (String domainSpec: cookieJar.keySet()) {
+        for (String domainSpec : cookieJar.keySet()) {
             // For sites outside the wikipedia.org domain, like wikidata.org,
             // transfer the centralauth cookies from wikipedia.org, too, if the user is logged in
+//            if (AccountUtil.isLoggedIn()
+//                    && domain.equals("www.wikidata.org") && domainSpec.endsWith("wikipedia.org")) {
             if (AccountUtil.isLoggedIn()
-                    && domain.equals("www.wikidata.org") && domainSpec.endsWith("wikipedia.org")) {
+                    && domain.equals("www.kavitakosh.org") && domainSpec.endsWith("kavitakosh.org")) {
                 cookiesList.addAll(makeCookieList(cookieJar.get(domainSpec), CENTRALAUTH_PREFIX));
             }
 
@@ -66,8 +71,10 @@ public final class SharedPreferenceCookieManager extends CookieManager {
             // Primarily to make sure that cookies set for .wikipedia.org are sent for
             // en.wikipedia.org and *.wikimedia.org
             // FIXME: Whitelist the domains we accept cookies from/send cookies to. SECURITY!!!1
+//            if (domain.endsWith(domainSpec)
+//                    || (domain.endsWith(".wikimedia.org") && domainSpec.endsWith("wikipedia.org"))) {
             if (domain.endsWith(domainSpec)
-                    || (domain.endsWith(".wikimedia.org") && domainSpec.endsWith("wikipedia.org"))) {
+                    || (domain.endsWith(".kavitakosh.org") && domainSpec.endsWith("kavitakosh.org"))) {
                 cookiesList.addAll(makeCookieList(cookieJar.get(domainSpec)));
             }
         }
@@ -98,7 +105,7 @@ public final class SharedPreferenceCookieManager extends CookieManager {
                         // Default to the URI's domain if domain is not explicitly set
                         String domainSpec = cookie.getDomain() == null ? uri.getAuthority() : cookie.getDomain();
                         if (!cookieJar.containsKey(domainSpec)) {
-                            cookieJar.put(domainSpec, new HashMap<String, String>());
+                            cookieJar.put(domainSpec, new HashMap<>());
                         }
 
                         if (cookie.hasExpired() || "deleted".equals(cookie.getValue())) {
@@ -129,20 +136,16 @@ public final class SharedPreferenceCookieManager extends CookieManager {
     }
 
     public synchronized void clearAllCookies() {
-        for (String domain: cookieJar.keySet()) {
+        for (String domain : cookieJar.keySet()) {
             Prefs.removeCookiesForDomain(domain);
         }
         Prefs.setCookieDomains(null);
         cookieJar.clear();
     }
 
-    public static List<String> makeList(String str) {
-        return StringUtil.delimiterStringToList(str, DELIMITER);
-    }
-
     @Nullable
     public synchronized String getCookieByName(@NonNull String name) {
-        for (String domainSpec: cookieJar.keySet()) {
+        for (String domainSpec : cookieJar.keySet()) {
             for (String cookie : cookieJar.get(domainSpec).keySet()) {
                 if (cookie.equals(name)) {
                     return cookieJar.get(domainSpec).get(cookie);
@@ -171,7 +174,7 @@ public final class SharedPreferenceCookieManager extends CookieManager {
     private List<String> makeCookieList(@NonNull Map<String, String> cookies,
                                         @Nullable String prefixFilter) {
         List<String> cookiesList = new ArrayList<>();
-        for (Map.Entry<String, String> entry: cookies.entrySet()) {
+        for (Map.Entry<String, String> entry : cookies.entrySet()) {
             if (prefixFilter == null || entry.getKey().startsWith(prefixFilter)) {
                 cookiesList.add(entry.getKey() + "=" + entry.getValue());
             }

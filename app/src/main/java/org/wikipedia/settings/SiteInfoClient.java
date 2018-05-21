@@ -100,7 +100,7 @@ public class SiteInfoClient {
     }
 
     @VisibleForTesting interface Service {
-        @GET("w/api.php?action=query&&format=json&formatversion=2&meta=siteinfo")
+        @GET("kk/api.php?action=query&&format=json&formatversion=2&meta=siteinfo")
         @NonNull Call<MwQueryResponse> request();
     }
 }

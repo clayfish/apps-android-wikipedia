@@ -56,7 +56,7 @@ class CreateAccountInfoClient {
     }
 
     @VisibleForTesting interface Service {
-        @GET("w/api.php?action=query&format=json&formatversion=2&meta=authmanagerinfo|tokens"
+        @GET("kk/api.php?action=query&format=json&formatversion=2&meta=authmanagerinfo|tokens"
                 + "&amirequestsfor=create&type=createaccount")
         Call<MwQueryResponse> request();
     }

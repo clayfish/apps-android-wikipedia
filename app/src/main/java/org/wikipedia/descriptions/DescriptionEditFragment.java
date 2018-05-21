@@ -150,7 +150,7 @@ public class DescriptionEditFragment extends Fragment {
     }
 
     private class EditViewCallback implements DescriptionEditView.Callback {
-        private final WikiSite wikiData = new WikiSite("www.wikidata.org", "");
+        private final WikiSite wikiData = new WikiSite("www.kavitakosh.org", "");
 
         @Override
         public void onSaveClick() {
@@ -159,7 +159,7 @@ public class DescriptionEditFragment extends Fragment {
 
             cancelCalls();
 
-            csrfClient = new CsrfTokenClient(new WikiSite("www.wikidata.org", ""),
+            csrfClient = new CsrfTokenClient(new WikiSite("www.kavitakosh.org", ""),
                     pageTitle.getWikiSite());
             getEditTokenThenSave(false);
 

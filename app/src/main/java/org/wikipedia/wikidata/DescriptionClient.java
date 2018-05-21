@@ -60,7 +60,7 @@ public class DescriptionClient {
     }
 
     @VisibleForTesting interface Service {
-        @GET("w/api.php?action=query&format=json&formatversion=2&prop=pageterms&wbptterms=description")
+        @GET("kk/api.php?action=query&format=json&formatversion=2&prop=pageterms&wbptterms=description")
         Call<MwQueryResponse> request(@NonNull @Query("titles") String titles);
     }
 }

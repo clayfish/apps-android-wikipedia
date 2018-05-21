@@ -221,7 +221,7 @@ public class CsrfTokenClient {
 
     @VisibleForTesting interface Service {
         @Headers("Cache-Control: no-cache")
-        @GET("w/api.php?action=query&format=json&formatversion=2&meta=tokens&type=csrf")
+        @GET("kk/api.php?action=query&format=json&formatversion=2&meta=tokens&type=csrf")
         Call<MwQueryResponse> request();
     }
 }

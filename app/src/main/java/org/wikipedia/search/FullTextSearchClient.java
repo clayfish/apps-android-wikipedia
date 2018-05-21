@@ -91,7 +91,7 @@ public class FullTextSearchClient {
     }
 
     protected interface Service {
-        String QUERY_PREFIX = "w/api.php?action=query&format=json&formatversion=2&converttitles="
+        String QUERY_PREFIX = "kk/api.php?action=query&format=json&formatversion=2&converttitles="
                 + "&prop=pageterms|pageimages|pageprops&ppprop=mainpage|disambiguation"
                 + "&wbptterms=description&generator=search&gsrnamespace=0&gsrwhat=text"
                 + "&gsrinfo=&gsrprop=redirecttitle&piprop=thumbnail&pilicense=any&pithumbsize="

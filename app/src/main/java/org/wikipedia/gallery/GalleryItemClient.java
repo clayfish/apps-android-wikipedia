@@ -88,11 +88,11 @@ class GalleryItemClient {
 
     @VisibleForTesting
     interface Service {
-        @GET("w/api.php?action=query&format=json&formatversion=2&continue=&prop=imageinfo"
+        @GET("kk/api.php?action=query&format=json&formatversion=2&continue=&prop=imageinfo"
                 + "&iiprop=url|dimensions|mime|extmetadata&iiurlwidth=" + MAX_IMAGE_WIDTH)
         Call<MwQueryResponse> requestImage(@NonNull @Query("titles") String titles);
 
-        @GET("w/api.php?action=query&format=json&formatversion=2&continue=&prop=videoinfo"
+        @GET("kk/api.php?action=query&format=json&formatversion=2&continue=&prop=videoinfo"
                 + "&viprop=url|dimensions|mime|extmetadata|derivatives&viurlwidth=" + MAX_IMAGE_WIDTH)
         Call<MwQueryResponse> requestVideo(@NonNull @Query("titles") String titles);
     }

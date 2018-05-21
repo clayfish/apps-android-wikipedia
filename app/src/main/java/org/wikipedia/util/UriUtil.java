@@ -81,7 +81,7 @@ public final class UriUtil {
 
         // also handle images like /w/extensions/ImageMap/desc-20.png?15600 on Estados Unidos
         // or like /api/rest_v1/page/graph/png/API/0/019dd76b5f4887040716e65de53802c5033cb40c.png
-        return (ret.startsWith("./") || ret.startsWith("/w/") || ret.startsWith("/wiki/"))
+        return (ret.startsWith("./") || ret.startsWith("/kk/") || ret.startsWith("/wiki/"))
                 || ret.startsWith("/api/")
                 ? wiki.uri().buildUpon().appendEncodedPath(ret.replaceFirst("/", "")).build().toString()
                 : ret;
@@ -100,7 +100,7 @@ public final class UriUtil {
 
     public static boolean isValidPageLink(@NonNull Uri uri) {
         return (!TextUtils.isEmpty(uri.getAuthority())
-                && uri.getAuthority().endsWith("wikipedia.org")
+                && uri.getAuthority().endsWith("kavitakosh.org")
                 && !TextUtils.isEmpty(uri.getPath())
                 && uri.getPath().startsWith("/wiki"));
     }
@@ -111,7 +111,7 @@ public final class UriUtil {
     */
     public static boolean isValidOfflinePageLink(@NonNull Uri uri) {
         return (!TextUtils.isEmpty(uri.getAuthority())
-                && uri.getAuthority().endsWith("wikipedia.org")
+                && uri.getAuthority().endsWith("kavitakosh.org")
                 && !TextUtils.isEmpty(uri.getPath())
                 && uri.getPath().endsWith(".html"));
     }
